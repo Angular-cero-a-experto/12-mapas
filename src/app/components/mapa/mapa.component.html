@@ -1,0 +1,37 @@
+<mat-card class="">
+  <mat-card-header>
+    <mat-card-title color="white">Mapa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="map-container">
+      <google-map height="600px"
+                  width="100%"
+                  [options]="options"
+                  (mapClick)="addMarker($event)"
+                  >
+        <map-marker #marker="mapMarker"
+                    *ngFor="let marcadorPosicion  of marcadores; let i = index;"
+                    [position]="marcadorPosicion.position"
+                    (mapClick)="openInfoWindow(marker, marcadorPosicion, i)"
+                    
+        >
+      </map-marker>
+      <map-info-window>
+        
+        <strong> {{ titulo }} </strong>
+        <p> {{ descripcion }} </p>
+
+        <div>
+          <button mat-raised-button color="primary" (click)="editarMarcador(marcador)">Editar</button>
+          <button mat-raised-button color="warn" (click)="borrarMarcador(posInfo)">Borrar</button>
+        </div>
+      </map-info-window>
+        
+      </google-map>
+
+      
+
+    </div>
+
+  </mat-card-content>
+</mat-card>
